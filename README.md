@@ -74,6 +74,7 @@ Put the dm_fas.par file in the bold/00X
 #Analysis
 ------------------------------------
 
+```
 mkanalysis-sess -fsd bold -stc up -surface self lh -fwhm 5 -event-related -paradigm dm_fs.par -nconditions 2 -spmhrf 0 -TR 2.335 -refeventdur 20 -nskip 4 -polyfit 2 -analysis analysis_WMmapp.sm05.lh -per-run -force
 
 mkcontrast-sess -analysis analysis_WMmapp.sm05.lh -contrast delay -a 2
@@ -82,4 +83,5 @@ mkcontrast-sess -analysis analysis_WMmapp.sm05.lh -contrast delay_base -a 2 -c 1
 
 selxavg3-sess -s WMmap_1 -s WMmap_2 -s WMmap_3 -analysis analysis_WMmapp.sm05.lh
 tksurfer-sess -s WMmap_1 -s WMmap_2 -s WMmap_3 -analysis analysis_WMmapp.sm05.lh -c delay -c delay_base 
+```
 
