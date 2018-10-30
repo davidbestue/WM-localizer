@@ -76,10 +76,17 @@ df_inter_delays.columns=['start', 'index' , 'duration']
 df_inter_delays['condition']='baseline'
 
 ##### Interleave
-concat_df = pd.concat([df_inter_delays, df_delays ]).sort_index().reset_index(drop=True)
-concat_df['intercept'] = 1
+#concat_df = pd.concat([df_inter_delays, df_delays ]).sort_index().reset_index(drop=True)
+#concat_df['intercept'] = 1
 
 #
+
+
+from toolz import interleave
+concat_df = pd.DataFrame(interleave([df_inter_delays.values, df_delays.values]))
+concat_df.columns=['start', 'index_c' , 'duration', 'condition']
+concat_df['intercept'] = 1
+
 
 #Matrix = pd.DataFrame(concat_df.values) 
 #Matrix= Matrix.round(2)
@@ -98,7 +105,7 @@ concat_df['intercept'] = 1
 with open('wmmap.par', 'w') as out:
     for i in range(0, shape(concat_df)[0]):
         out.write(str( round(concat_df.loc[i, 'start'], 2)  ) + '\t')
-        out.write(str(concat_df.loc[i, 'index'] ) + '\t')
+        out.write(str(concat_df.loc[i, 'index_c'] ) + '\t')
         out.write(str( round(concat_df.loc[i, 'duration'], 2)  ) + '\t')
         out.write(str( round(concat_df.loc[i, 'intercept'], 2)  ) + '\t')
         out.write(concat_df.loc[i, 'condition']  + '\n')
