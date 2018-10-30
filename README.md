@@ -62,29 +62,30 @@ Three columns
 start  //   condition   //  duration // intercept // name_condition
 
 
-Use the code to extracte the dm_fas.par file from raw
+Use the code to extracte the dm_fas.par file from raw behaviour (The example of the behaviour is: example_beh.txt)
 
 Example:
 ```
-python -i WM_mapping_beh_dmfas
-
+python WM_mapping_beh_dmfas
 ```
 
-The dm_fas.par file  willbe in the folder where the behaviour was. The example of the behaviour is: example_beh.txt
+(select the example_beh.txt in the dialogue box)
+
+The dm_fas.par file  will be in the folder where the behaviour was. 
 
 
 
 #Analysis
 ------------------------------------
 
+More information about first level analyisis [here](https://surfer.nmr.mgh.harvard.edu/fswiki/FsFastTutorialV5.1/FsFastFirstLevel)
+
 ```
-mkanalysis-sess -fsd bold -stc up -surface self lh -fwhm 5 -event-related -paradigm dm_fs.par -nconditions 2 -spmhrf 0 -TR 2.335 -refeventdur 20 -nskip 4 -polyfit 2 -analysis analysis_WMmapp.sm05.lh -per-run -force
+mkanalysis-sess -analysis wm_mapping.lh -paradigm wmmap.par -fsd bold -surface self lh -fwhm 5 -event-related  -nconditions 2 -spmhrf 0 -TR 2.335 -refeventdur 3 -nskip 4 -polyfit 2  -per-run -force
 
-mkcontrast-sess -analysis analysis_WMmapp.sm05.lh -contrast delay -a 2
-mkcontrast-sess -analysis analysis_WMmapp.sm05.lh -contrast delay_base -a 2 -c 1
+mkcontrast-sess -analysis wm_mapping.lh -contrast memory-v-base -a 1
 
-
-selxavg3-sess -s WMmap_1 -s WMmap_2 -s WMmap_3 -analysis analysis_WMmapp.sm05.lh
-tksurfer-sess -s WMmap_1 -s WMmap_2 -s WMmap_3 -analysis analysis_WMmapp.sm05.lh -c delay -c delay_base 
+selxavg3-sess -s WMmap_1 -s WMmap_2 -s WMmap_3 -analysis wm_mapping.lh
+tksurfer-sess -s WMmap_1 -s WMmap_2 -s WMmap_3 -analysis wm_mapping.lh -c memory-v-base 
 ```
 
