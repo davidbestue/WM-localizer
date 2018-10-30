@@ -55,8 +55,11 @@ tkregister-sess -s WMmap_1 -s WMmap_2 -s WMmap_3 -s WMmap_4 -fsd bold -per-run -
 ```
 
 #dm_fas.par files
+
+To see how they should look like visit [this](https://surfer.nmr.mgh.harvard.edu/fswiki/WorkmemPar)
+
 Three columns
-start  //   condition   //  final
+start  //   condition   //  duration // intercept // name_condition
 
 
 Use the code to extracte the dm_fas.par file from raw
@@ -67,7 +70,7 @@ python -i WM_mapping_beh_dmfas
 
 ```
 
-Put the dm_fas.par file in the bold/00X
+The dm_fas.par file  willbe in the folder where the behaviour was. The example of the behaviour is: example_beh.txt
 
 
 
