@@ -84,7 +84,15 @@ More information about first level analyisis [here](https://surfer.nmr.mgh.harva
 mkanalysis-sess -analysis wm_mapping.lh -paradigm wmmap.par -fsd bold -surface self lh -fwhm 5 -event-related  -nconditions 2 -spmhrf 0 -TR 2.335 -refeventdur 3 -nskip 4 -polyfit 2  -per-run -force
 
 mkcontrast-sess -analysis wm_mapping.lh -contrast memory-v-base -a 1
+```
+There can be some problems with the Matlab path when running the mkcontrast (matlab required)
+ou have to set the Matlab path in your .bashrc In my case, what worked was:  
 
+PATH=”/Applications/MATLAB_R2014a.app/bin”:”$PATH”  
+
+(In the .bashrc, edited with nano)
+
+```
 selxavg3-sess -s WMmap_1 -s WMmap_2 -s WMmap_3 -analysis wm_mapping.lh
 tksurfer-sess -s WMmap_1 -s WMmap_2 -s WMmap_3 -analysis wm_mapping.lh -c memory-v-base 
 ```
