@@ -88,7 +88,7 @@ mkcontrast-sess -analysis wm_mapping.lh -contrast memory-v-base -a 1
 There can be some problems with the Matlab path when running the mkcontrast (matlab required)
 ou have to set the Matlab path in your .bashrc In my case, what worked was:  
 
-PATH=”/usr/local/MATLAB/R2018a/bin”:”$PATH”  
+***PATH=”/usr/local/MATLAB/R2018a/bin”:”$PATH”***  
 
 (In the .bashrc, edited with nano, using the path of the matlab installed in the local (it did not wok with the runtime)
 
