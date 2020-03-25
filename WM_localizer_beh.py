@@ -11,6 +11,7 @@ import easygui
 import pandas as pd
 from numpy import shape
 import os
+from toolz import interleave
 
                                                                                                             
 file_WMloc = easygui.fileopenbox() 
@@ -82,7 +83,6 @@ df_inter_delays['condition']='baseline'
 #
 
 
-from toolz import interleave
 concat_df = pd.DataFrame(interleave([df_inter_delays.values, df_delays.values]))
 concat_df.columns=['start', 'index_c' , 'duration', 'condition']
 concat_df['intercept'] = 1
