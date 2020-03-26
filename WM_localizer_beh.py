@@ -81,8 +81,6 @@ df_inter_delays['condition']='baseline'
 #concat_df['intercept'] = 1
 
 #
-
-
 concat_df = pd.DataFrame(interleave([df_inter_delays.values, df_delays.values]))
 concat_df.columns=['start', 'index_c' , 'duration', 'condition']
 concat_df['intercept'] = 1
