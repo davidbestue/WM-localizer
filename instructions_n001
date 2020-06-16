@@ -1,0 +1,214 @@
+
+
+export SUBJECTS_DIR=/home/david/Desktop/freesurfer/n001/structurals/struct_1
+cd $SUBJECTS_DIR
+cd /home/david/Desktop/freesurfer/n001/retinotopy
+
+
+
+---------------- Structural ------------------------
+
+####################### Structural 1
+tcsh
+source /usr/local/freesurfer/SetUpFreeSurfer.csh
+setenv SUBJECTS_DIR ~/Desktop/Distractor_project/imaging/n001/structural/struct_1
+cd $SUBJECTS_DIR
+
+recon-all -i 00000008/00000001.dcm -subject n001_struct1 -all
+
+scp -r davsan@akalla.cns.ki.se:~/Desktop/Distractor_project/imaging/n001/structural/struct_1/n001_struct1/. /home/david/Desktop/freesurfer/n001/structurals/struct_1/n001
+scp -r davsan@akalla.cns.ki.se:~/Desktop/Distractor_project/imaging/n001/structural/struct_1/fsaverage /home/david/Desktop/freesurfer/n001/structurals/struct_1
+scp -r davsan@akalla.cns.ki.se:~/Desktop/Distractor_project/imaging/n001/structural/struct_1/lh.EC_average /home/david/Desktop/freesurfer/n001/structurals/struct_1
+scp -r davsan@akalla.cns.ki.se:~/Desktop/Distractor_project/imaging/n001/structural/struct_1/rh.EC_average /home/david/Desktop/freesurfer/n001/structurals/struct_1
+
+
+
+---------- Encoding -------------------------------------------------------
+
+/home/david/Desktop/freesurfer/n001/encoding/encoding_1, sessidlist
+/home/david/Desktop/freesurfer/n001/encoding/encoding_1/bold, subjectname
+
+sshpass -p "TevusIk2" scp -r davsan@akalla.cns.ki.se:~/Desktop/Distractor_project/imaging/n001/encoding_mapping/run1/fmri3_Encoding_Ax.nii /home/david/Desktop/freesurfer/n001/encoding/encoding_1/bold/001/f.nii
+
+sshpass -p "TevusIk2" scp -r davsan@akalla.cns.ki.se:~/Desktop/Distractor_project/imaging/n001/encoding_mapping/run2/fmri3_Encoding_Ax.nii /home/david/Desktop/freesurfer/n001/encoding/encoding_1/bold/002/f.nii
+
+sshpass -p "TevusIk2" scp -r davsan@akalla.cns.ki.se:~/Desktop/Distractor_project/imaging/n001/encoding_mapping/run3/fmri3_Encoding_Ax.nii /home/david/Desktop/freesurfer/n001/encoding/encoding_1/bold/003/f.nii
+
+sshpass -p "TevusIk2" scp -r davsan@akalla.cns.ki.se:~/Desktop/Distractor_project/imaging/n001/encoding_mapping/run4/fmri3_Encoding_Ax.nii /home/david/Desktop/freesurfer/n001/encoding/encoding_1/bold/004/f.nii
+
+sshpass -p "TevusIk2" scp -r davsan@akalla.cns.ki.se:~/Desktop/Distractor_project/imaging/n001/encoding_mapping/run5/fmri3_Encoding_Ax.nii /home/david/Desktop/freesurfer/n001/encoding/encoding_1/bold/005/f.nii
+
+preproc-sess -s encoding_1 -fsd bold -surface self lhrh -mni305 -fwhm 5 -per-run
+
+#Template to the akalla for the spm preprocessing
+scp -r /home/david/Desktop/freesurfer/n001/encoding/encoding_1/bold/001/template.nii davsan@akalla.cns.ki.se:~/Desktop/Distractor_project/imaging/n001/encoding_mapping/template/
+
+
+
+------------------------------ Retinotopy -----------------------------------
+
+
+scp -r davsan@akalla.cns.ki.se:~/Desktop/Distractor_project/imaging/n001/Att_map/run1/fmri1_RetinoOp_VIS_Oblique.nii /home/david/Desktop/freesurfer/n001/retinotopy/n001/bold/001/f.nii
+scp -r davsan@akalla.cns.ki.se:~/Desktop/Distractor_project/imaging/n001/Att_map_ccw/run1/fmri1_RetinoOp_VIS_Oblique.nii /home/david/Desktop/freesurfer/n001/retinotopy/n001/bold/002/f.nii
+scp -r davsan@akalla.cns.ki.se:~/Desktop/Distractor_project/imaging/n001/Eccentricity/run1/fmri1_RetinoOp_VIS_Oblique.nii /home/david/Desktop/freesurfer/n001/retinotopy/n001/bold/003/f.nii
+scp -r davsan@akalla.cns.ki.se:~/Desktop/Distractor_project/imaging/n001/Eccentricity_out/run1/fmri1_RetinoOp_VIS_Oblique.nii /home/david/Desktop/freesurfer/n001/retinotopy/n001/bold/004/f.nii
+
+scp -r davsan@akalla.cns.ki.se:~/Desktop/Distractor_project/imaging/n001/Att_map/run2/fmri1_RetinoOp_VIS_Oblique.nii /home/david/Desktop/freesurfer/n001/retinotopy/n001/bold/005/f.nii
+scp -r davsan@akalla.cns.ki.se:~/Desktop/Distractor_project/imaging/n001/Att_map_ccw/run2/fmri1_RetinoOp_VIS_Oblique.nii /home/david/Desktop/freesurfer/n001/retinotopy/n001/bold/006/f.nii
+scp -r davsan@akalla.cns.ki.se:~/Desktop/Distractor_project/imaging/n001/Eccentricity/run2/fmri1_RetinoOp_VIS_Oblique.nii /home/david/Desktop/freesurfer/n001/retinotopy/n001/bold/007/f.nii
+scp -r davsan@akalla.cns.ki.se:~/Desktop/Distractor_project/imaging/n001/Eccentricity_out/run2/fmri1_RetinoOp_VIS_Oblique.nii /home/david/Desktop/freesurfer/n001/retinotopy/n001/bold/008/f.nii
+
+
+#rtopy.par files
+
+001: 
+stimtype polar
+direction pos
+
+002: 
+stimtype polar
+direction neg
+
+003: 
+stimtype eccen
+direction pos
+
+004: 
+stimtype eccen
+direction neg
+
+005: 
+stimtype polar
+direction pos
+
+006: 
+stimtype polar
+direction neg
+
+007: 
+stimtype eccen
+direction pos
+
+008: 
+stimtype eccen
+direction neg
+
+
+##### Preprocess
+
+preproc-sess -s n001 -fwhm 5 -fsd bold -per-run
+
+#######################     visual_fsign_rh.nii.gz
+#######################     ips_fsign_rh.nii.gz
+
+
+mkanalysis-sess -analysis retinotopy.lh  -surface self lh -TR 1.6 -retinotopy 28.5 -paradigm rtopy.par -fsd bold -fwhm 5 -per-run
+mkanalysis-sess -analysis retinotopy.rh  -surface self rh -TR 1.6 -retinotopy 28.5 -paradigm rtopy.par -fsd bold -fwhm 5 -per-run
+
+
+selxavg3-sess -analysis retinotopy.lh -s n001
+selxavg3-sess -analysis retinotopy.rh -s n001
+
+
+fieldsign-sess -a retinotopy.rh -sphere -s n001
+fieldsign-sess -a retinotopy.lh -sphere -s n001
+
+
+
+### visual
+mri_vol2roi --label /home/david/Desktop/freesurfer/n001/structurals/struct_1/n001/label/visual_rh.label --srcvol /home/david/Desktop/freesurfer/n001/encoding/encoding_1/bold/001/template.nii.gz --srcreg /home/david/Desktop/freesurfer/n001/encoding/encoding_1/bold/001/register.dof6.dat~ --finalmskvol /home/david/Desktop/freesurfer/n001/encoding/encoding_1/bold/001/visual_fsign_rh --roiavg visualrh.delete.dat
+
+mri_vol2roi --label /home/david/Desktop/freesurfer/n001/structurals/struct_1/n001/label/visual_lh.label --srcvol /home/david/Desktop/freesurfer/n001/encoding/encoding_1/bold/001/template.nii.gz --srcreg /home/david/Desktop/freesurfer/n001/encoding/encoding_1/bold/001/register.dof6.dat~ --finalmskvol /home/david/Desktop/freesurfer/n001/encoding/encoding_1/bold/001/visual_fsign_lh --roiavg visuallh.delete.dat
+
+
+### ips
+mri_vol2roi --label /home/david/Desktop/freesurfer/n001/structurals/struct_1/n001/label/ips_rh.label --srcvol /home/david/Desktop/freesurfer/n001/encoding/encoding_1/bold/001/template.nii.gz --srcreg /home/david/Desktop/freesurfer/n001/encoding/encoding_1/bold/001/register.dof6.dat~ --finalmskvol /home/david/Desktop/freesurfer/n001/encoding/encoding_1/bold/001/ips_fsign_rh --roiavg ipsrh.delete.dat
+
+mri_vol2roi --label /home/david/Desktop/freesurfer/n001/structurals/struct_1/n001/label/ips_lh.label --srcvol /home/david/Desktop/freesurfer/n001/encoding/encoding_1/bold/001/template.nii.gz --srcreg /home/david/Desktop/freesurfer/n001/encoding/encoding_1/bold/001/register.dof6.dat~ --finalmskvol /home/david/Desktop/freesurfer/n001/encoding/encoding_1/bold/001/ips_fsign_lh --roiavg ipslh.delete.dat
+
+
+
+### ips structural 
+#1)copy the struct_1/x001 inside a folder struct_1/s/
+
+export SUBJECTS_DIR=/mnt/c/Users/David/Desktop/KI_Desktop/freesurfer/n001/structurals/struct_1/s
+cd $SUBJECTS_DIR
+
+mri_annotation2label --subject n001 --hemi rh --annotation aparc.a2009s --outdir /mnt/c/Users/David/Desktop/KI_Desktop/freesurfer/n001/structurals/struct_1/s/n001/labels_extra
+mri_annotation2label --subject n001 --hemi lh --annotation aparc.a2009s --outdir /mnt/c/Users/David/Desktop/KI_Desktop/freesurfer/n001/structurals/struct_1/s/n001/labels_extra
+ 
+
+mri_vol2roi --label /mnt/c/Users/David/Desktop/KI_Desktop/freesurfer/n001/structurals/struct_1/s/n001/labels_extra/rh.S_intrapariet_and_P_trans.label \
+--srcvol /mnt/c/Users/David/Desktop/KI_Desktop/freesurfer/n001/encoding/encoding_1/bold/001/template.nii.gz \
+--srcreg /mnt/c/Users/David/Desktop/KI_Desktop/freesurfer/n001/encoding/encoding_1/bold/001/register.dof6.dat~ \
+--finalmskvol /mnt/c/Users/David/Desktop/temp_masks_cluster/n001/ips_str_rh --roiavg ips_str_rh.delete.dat
+
+mri_vol2roi --label /mnt/c/Users/David/Desktop/KI_Desktop/freesurfer/n001/structurals/struct_1/s/n001/labels_extra/lh.S_intrapariet_and_P_trans.label \
+--srcvol /mnt/c/Users/David/Desktop/KI_Desktop/freesurfer/n001/encoding/encoding_1/bold/001/template.nii.gz \
+--srcreg /mnt/c/Users/David/Desktop/KI_Desktop/freesurfer/n001/encoding/encoding_1/bold/001/register.dof6.dat~ \
+--finalmskvol /mnt/c/Users/David/Desktop/temp_masks_cluster/n001/ips_str_lh --roiavg ips_str_lh.delete.dat
+
+
+### frontal together
+tksurfer n001 lh inflated
+change to pial
+files - load -load annotation 
+lh.aparc.annot file
+
+
+mri_mergelabels -i /mnt/c/Users/David/Desktop/KI_Desktop/freesurfer/n001/structurals/struct_1/s/n001/labels_extra/lh.S_front_sup.label -i /mnt/c/Users/David/Desktop/KI_Desktop/freesurfer/n001/structurals/struct_1/s/n001/labels_extra/lh.S_front_middle.label -i /mnt/c/Users/David/Desktop/KI_Desktop/freesurfer/n001/structurals/struct_1/s/n001/labels_extra/lh.S_front_inf.label -o /mnt/c/Users/David/Desktop/frontal_masks/n001/n001_frontal_lh.label
+mri_mergelabels -i /mnt/c/Users/David/Desktop/KI_Desktop/freesurfer/n001/structurals/struct_1/s/n001/labels_extra/rh.S_front_sup.label -i /mnt/c/Users/David/Desktop/KI_Desktop/freesurfer/n001/structurals/struct_1/s/n001/labels_extra/rh.S_front_middle.label -i /mnt/c/Users/David/Desktop/KI_Desktop/freesurfer/n001/structurals/struct_1/s/n001/labels_extra/rh.S_front_inf.label -o /mnt/c/Users/David/Desktop/frontal_masks/n001/n001_frontal_rh.label
+
+mri_vol2roi --label /mnt/c/Users/David/Desktop/frontal_masks/n001/n001_frontal_lh.label \
+--srcvol /mnt/c/Users/David/Desktop/KI_Desktop/freesurfer/n001/encoding/encoding_1/bold/001/template.nii.gz \
+--srcreg /mnt/c/Users/David/Desktop/KI_Desktop/freesurfer/n001/encoding/encoding_1/bold/001/register.dof6.dat~ \
+--finalmskvol /mnt/c/Users/David/Desktop/frontal_masks/n001/n001_frontal_lh --roiavg front_str_lh.delete.dat
+
+mri_vol2roi --label /mnt/c/Users/David/Desktop/frontal_masks/n001/n001_frontal_rh.label \
+--srcvol /mnt/c/Users/David/Desktop/KI_Desktop/freesurfer/n001/encoding/encoding_1/bold/001/template.nii.gz \
+--srcreg /mnt/c/Users/David/Desktop/KI_Desktop/freesurfer/n001/encoding/encoding_1/bold/001/register.dof6.dat~ \
+--finalmskvol /mnt/c/Users/David/Desktop/frontal_masks/n001/n001_frontal_rh --roiavg front_str_rh.delete.dat
+
+
+### frontal one by one
+
+export SUBJECTS_DIR=/mnt/c/Users/David/Desktop/KI_Desktop/freesurfer/n001/structurals/struct_1/s
+cd $SUBJECTS_DIR
+
+mri_vol2roi --label /mnt/c/Users/David/Desktop/KI_Desktop/freesurfer/n001/structurals/struct_1/s/n001/labels_extra/rh.S_front_sup.label \
+--srcvol /mnt/c/Users/David/Desktop/KI_Desktop/freesurfer/n001/encoding/encoding_1/bold/001/template.nii.gz \
+--srcreg /mnt/c/Users/David/Desktop/KI_Desktop/freesurfer/n001/encoding/encoding_1/bold/001/register.dof6.dat~ \
+--finalmskvol /mnt/c/Users/David/Desktop/IDIBAPS/front_sep_masks/n001/front_sup_rh --roiavg front_sup_rh.delete.dat
+
+mri_vol2roi --label /mnt/c/Users/David/Desktop/KI_Desktop/freesurfer/n001/structurals/struct_1/s/n001/labels_extra/lh.S_front_sup.label \
+--srcvol /mnt/c/Users/David/Desktop/KI_Desktop/freesurfer/n001/encoding/encoding_1/bold/001/template.nii.gz \
+--srcreg /mnt/c/Users/David/Desktop/KI_Desktop/freesurfer/n001/encoding/encoding_1/bold/001/register.dof6.dat~ \
+--finalmskvol /mnt/c/Users/David/Desktop/IDIBAPS/front_sep_masks/n001/front_sup_lh --roiavg front_sup_lh.delete.dat
+
+
+mri_vol2roi --label /mnt/c/Users/David/Desktop/KI_Desktop/freesurfer/n001/structurals/struct_1/s/n001/labels_extra/rh.S_front_middle.label \
+--srcvol /mnt/c/Users/David/Desktop/KI_Desktop/freesurfer/n001/encoding/encoding_1/bold/001/template.nii.gz \
+--srcreg /mnt/c/Users/David/Desktop/KI_Desktop/freesurfer/n001/encoding/encoding_1/bold/001/register.dof6.dat~ \
+--finalmskvol /mnt/c/Users/David/Desktop/IDIBAPS/front_sep_masks/n001/front_middle_rh --roiavg front_mid_rh.delete.dat
+
+mri_vol2roi --label /mnt/c/Users/David/Desktop/KI_Desktop/freesurfer/n001/structurals/struct_1/s/n001/labels_extra/lh.S_front_middle.label \
+--srcvol /mnt/c/Users/David/Desktop/KI_Desktop/freesurfer/n001/encoding/encoding_1/bold/001/template.nii.gz \
+--srcreg /mnt/c/Users/David/Desktop/KI_Desktop/freesurfer/n001/encoding/encoding_1/bold/001/register.dof6.dat~ \
+--finalmskvol /mnt/c/Users/David/Desktop/IDIBAPS/front_sep_masks/n001/front_middle_lh --roiavg front_mid_lh.delete.dat
+
+
+mri_vol2roi --label /mnt/c/Users/David/Desktop/KI_Desktop/freesurfer/n001/structurals/struct_1/s/n001/labels_extra/rh.S_front_inf.label \
+--srcvol /mnt/c/Users/David/Desktop/KI_Desktop/freesurfer/n001/encoding/encoding_1/bold/001/template.nii.gz \
+--srcreg /mnt/c/Users/David/Desktop/KI_Desktop/freesurfer/n001/encoding/encoding_1/bold/001/register.dof6.dat~ \
+--finalmskvol /mnt/c/Users/David/Desktop/IDIBAPS/front_sep_masks/n001/front_inf_rh --roiavg front_inf_rh.delete.dat
+
+mri_vol2roi --label /mnt/c/Users/David/Desktop/KI_Desktop/freesurfer/n001/structurals/struct_1/s/n001/labels_extra/lh.S_front_inf.label \
+--srcvol /mnt/c/Users/David/Desktop/KI_Desktop/freesurfer/n001/encoding/encoding_1/bold/001/template.nii.gz \
+--srcreg /mnt/c/Users/David/Desktop/KI_Desktop/freesurfer/n001/encoding/encoding_1/bold/001/register.dof6.dat~ \
+--finalmskvol /mnt/c/Users/David/Desktop/IDIBAPS/front_sep_masks/n001/front_inf_lh --roiavg front_inf_lh.delete.dat
+
+
+###
+
+
+
