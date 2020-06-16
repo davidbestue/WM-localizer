@@ -1,11 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Oct 29 14:01:37 2018
-
-@author: David
-"""
-
-
 
 import easygui
 import pandas as pd
@@ -15,8 +7,8 @@ from toolz import interleave
 
                                                                                                             
 file_WMloc = easygui.fileopenbox() 
-seq = file_WMloc.split('\\')[:-1] 
-s='\\'
+seq = file_WMloc.split('/')[:-1] 
+s='/'
 path = s.join(seq) 
 os.chdir(path)
 
@@ -39,7 +31,7 @@ df['end_delay_ref'] = df['end_delay'] -ref_time
 ## Duration delay
 df['duration_delay'] = df['end_delay_ref'] - df['start_delay_ref']
 
-df['zeros'] = 0
+df['zeros'] =  0
 df['ones'] = 1
 
 df_delays = df[[ 'start_delay_ref',  'duration_delay', 'ones']]
@@ -74,7 +66,7 @@ df_delays['condition']='delay'
 
 df_inter_delays = df[[ 'starts_inter_delay', 'zeros', 'durations_inter']]
 df_inter_delays.columns=['start', 'index' , 'duration']
-df_inter_delays['condition']='baseline'
+df_inter_delays['condition']='baseline';
 
 ##### Interleave
 #concat_df = pd.concat([df_inter_delays, df_delays ]).sort_index().reset_index(drop=True)
@@ -84,6 +76,7 @@ df_inter_delays['condition']='baseline'
 concat_df = pd.DataFrame(interleave([df_inter_delays.values, df_delays.values]))
 concat_df.columns=['start', 'index_c' , 'duration', 'condition']
 concat_df['intercept'] = 1
+concat_df['index_c'] = concat_df['index_c'].replace([0,1], [1,2]);
 
 
 #Matrix = pd.DataFrame(concat_df.values) 
@@ -102,11 +95,11 @@ concat_df['intercept'] = 1
 
 with open('wmmap.par', 'w') as out:
     for i in range(0, shape(concat_df)[0]):
-        out.write(str( round(concat_df.loc[i, 'start'], 2)  ) + '\t')
-        out.write(str(concat_df.loc[i, 'index_c'] ) + '\t')
-        out.write(str( round(concat_df.loc[i, 'duration'], 2)  ) + '\t')
-        out.write(str( round(concat_df.loc[i, 'intercept'], 2)  ) + '\t')
-        out.write(concat_df.loc[i, 'condition']  + '\n')
+        out.write(str( round(concat_df.loc[i, 'start'], 2)  ) + '\t');
+        out.write(str(concat_df.loc[i, 'index_c'] ) + '\t');
+        out.write(str( round(concat_df.loc[i, 'duration'], 2)  ) + '\t');
+        out.write(str( round(concat_df.loc[i, 'intercept'], 2)  ) + '\t');
+        out.write(concat_df.loc[i, 'condition']  + '\n');
 
 
 
@@ -117,11 +110,3 @@ with open('wmmap.par', 'w') as out:
 #        
 #        
         
-
-
-
-
-
-
-
-
