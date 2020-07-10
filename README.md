@@ -97,3 +97,8 @@ selxavg3-sess -s WMmap_1 -s WMmap_2 -s WMmap_3 -analysis wm_mapping.lh
 tksurfer-sess -s WMmap_1 -s WMmap_2 -s WMmap_3 -analysis wm_mapping.lh -c memory-v-base 
 ```
 
+
+Codes for merging masks: 
+```
+mri_mergelabels -i /home/david/Desktop/l001_parietal1_rh.label -i /home/david/Desktop/l001_parietal2_rh.label  -o /home/david/Desktop/l001_parietal_rh.label
+```
